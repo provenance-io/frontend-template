@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Header, SpriteSheet, BaseStyle } from 'Components';
+import { GlobalStyle, Themes } from 'theme';
+import {
+  Home,
+} from 'Pages';
+
+const Version = styled.div`
+  text-align: right;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 10;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter basename={process.env.PUBLIC_URL || ''}>
+        <GlobalStyle theme={Themes.default} />
+        <SpriteSheet />
+        <ThemeProvider theme={Themes.default}>
+          <BaseStyle>
+            <Header />
+            <Switch>
+              <Route exact path="/" component={Home} />
+            </Switch>
+            <Version>v{process.env.REACT_APP_VERSION}</Version>
+          </BaseStyle>
+        </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
