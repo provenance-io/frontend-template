@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { SpriteSheet, BaseStyle } from 'Components';
 import { GlobalStyle, Themes } from 'theme';
-import { Home } from 'Pages';
+import { Home, NotFound } from 'Pages';
 
 const Version = styled.div`
   text-align: right;
@@ -22,6 +22,7 @@ function App() {
         <BaseStyle>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route component={NotFound} />
           </Switch>
           <Version>v{process.env.REACT_APP_VERSION}</Version>
         </BaseStyle>
